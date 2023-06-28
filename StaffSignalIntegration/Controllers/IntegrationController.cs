@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StaffSignalsIntegration.Model;
 using StaffSignalsIntegration.Repository;
 
@@ -6,6 +7,7 @@ namespace StaffSignalsIntegration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class IntegrationController : ControllerBase
     {
         private readonly IIntegrationRepository _integrationRepository;
@@ -15,7 +17,7 @@ namespace StaffSignalsIntegration.Controllers
             _integrationRepository = integrationRepository;
         }
 
-        [HttpGet("active-employess")]
+        [HttpGet("active-employees")]
         public ActionResult<IEnumerable<Employee>> GetEmployees()
         {
             var employees = _integrationRepository.GetEmployees();
